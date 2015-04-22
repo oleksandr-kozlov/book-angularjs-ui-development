@@ -7,6 +7,7 @@ module.exports = function (grunt) {
          },
          dist: {
             src: [
+               'src/bower/jquery/dist/jquery.js',
                'src/bower/angular/angular.js',
                'src/js/vendor/ui-utils.js',
                'src/js/app.js',
@@ -18,8 +19,9 @@ module.exports = function (grunt) {
       },
       copy: {
          main: {
-            src: 'src/css/main.css',
-            dest: 'dist/css/main.css',
+            files: [
+               {expand: true, cwd: 'src/css/', src: ['**'], dest: 'dist/css/'}
+            ]
          },
       },
       targethtml: {

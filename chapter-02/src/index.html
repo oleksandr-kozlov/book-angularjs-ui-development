@@ -4,15 +4,37 @@
 <head>
    <meta charset="UTF-8">
    <title>Hello World</title>
+   <link rel="stylesheet" href="css/vendor/bootstrap.css">
    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body data-ng-app="myApp">
-   <div data-ng-controller="helloWorldCtrl">
-      <div hello-world name="name"></div>
+   <div class="container" ng-controller="helloWorldCtrl">
+      <div class="row spacer-sm">
+         <label class="col-xs-5 text-right" for="fname">First Name</label>
+         <input class="col-xs-7" type="text" id="fname" ng-model="person.firstName" ui-event="{ focus: 'focusCallback()', blur : 'blurCallback()' }">
+      </div>
+      <div class="row spacer-sm">
+         <label class="col-xs-5 text-right" for="lname">Last Name</label>
+         <input class="col-xs-7" type="text" id="lname" ng-model="person.lastName" ui-keydown="{113: 'helpKeyDown($event)'}">
+      </div>
+      <div class="row spacer-sm">
+         <label class="col-xs-5 text-right" for="phone">Phone</label>
+         <input class="col-xs-7" type="tel" id="phone" ui-mask="{{ mask }}" ng-model="person.phone">
+      </div>
+      <div class="row spacer-lg" ng-show="helpText">
+         <div class="col-xs-2"></div>
+         <div class="col-xs-8">{{ helpText }}</div>
+      </div>
+      <div ui-jq="tooltip" original-title="{{ tooltip() }}" class="row spacer-lg">
+         <pre ng-style="modelStatus()" class="col-xs-12">
+            <code>{{ getModel() }}</code>
+         </pre>
+      </div>
    </div>
 
    <!--(if target dev)><!-->
+   <script src="bower/jquery/dist/jquery.js"></script>
    <script src="bower/angular/angular.js"></script>
    <script src="js/vendor/ui-utils.js"></script>
    <script src="js/app.js"></script>
